@@ -1,0 +1,36 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String         @id @default(uuid())
+  name         String
+  avatar_url   String
+  victorys     String
+  pix_key      String         @unique
+  created_at   DateTime       @default(now())
+  updated_at   DateTime       @updatedAt
+  Championship Championship[]
+
+  @@map("users")
+}
+
+model Championship {
+  id          String   @id @default(uuid())
+  name        String
+  avatar_url  String
+  victorys    String
+  pix_key     String   @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  champion    User     @relation(fields: [champion_id], references: [id])
+  champion_id String
+
+  @@map("championship")
+}
