@@ -12,7 +12,7 @@ model User {
   id           String         @id @default(uuid())
   name         String
   avatar_url   String
-  victorys     String
+  victorys     Int
   pix_key      String         @unique
   created_at   DateTime       @default(now())
   updated_at   DateTime       @updatedAt
@@ -25,7 +25,7 @@ model Championship {
   id          String   @id @default(uuid())
   name        String
   avatar_url  String
-  victorys    String
+  victorys    Int
   pix_key     String   @unique
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
