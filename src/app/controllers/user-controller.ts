@@ -19,4 +19,12 @@ export class UserController {
       body: user,
     };
   }
+
+  async getUsersByVictorys(httpRequest: HttpRequest) {
+    const users = await this.userUseCase.getUsersByVictory();
+    return {
+      status: 200,
+      body: users,
+    };
+  }
 }

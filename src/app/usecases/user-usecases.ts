@@ -8,6 +8,11 @@ class UserUseCase {
     const user = await this.userRepository.createUser(data);
     return user;
   }
+
+  async getUsersByVictory(){
+    const users = await this.userRepository.getUserByVictorys();
+    return users;
+  }
 }
 
 export default UserUseCase;

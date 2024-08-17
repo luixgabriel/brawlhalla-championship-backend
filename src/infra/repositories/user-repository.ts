@@ -13,6 +13,13 @@ class UserRepositoryPrisma implements UserRepository {
     });
     return result;
   }
+
+  async getUserByVictorys(): Promise<User[]> {
+    const result = await prisma.user.findMany({
+      orderBy: { victorys: "desc" },
+    });
+    return result;
+  }
 }
 
 export default UserRepositoryPrisma;

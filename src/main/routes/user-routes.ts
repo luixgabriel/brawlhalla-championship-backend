@@ -7,4 +7,5 @@ const userController = new UserController(makeUserUseCase());
 export const UserRoutes = (router: Router): void => {
   const prefix = "/users";
   router.post(prefix + "/", adaptRoute(userController, "createUser"));
+  router.get(prefix + "/", adaptRoute(userController, "getUsersByVictorys"));
 };
