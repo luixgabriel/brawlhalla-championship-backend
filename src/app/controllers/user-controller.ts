@@ -27,4 +27,22 @@ export class UserController {
       body: users,
     };
   }
+
+  async addVictory(httpRequest: HttpRequest) {
+    const { id } = httpRequest.params;
+    const user = await this.userUseCase.addVictory(id);
+    return {
+      status: 200,
+      body: user,
+    };
+  }
+
+  async removeVictory(httpRequest: HttpRequest){
+    const { id } = httpRequest.params;
+    const user = await this.userUseCase.removeVictory(id);
+    return {
+      status: 200,
+      body: user,
+    };
+  }
 }

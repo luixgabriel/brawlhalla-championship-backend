@@ -20,6 +20,30 @@ class UserRepositoryPrisma implements UserRepository {
     });
     return result;
   }
+  async findUserById(id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+    return user ? user : null;
+  }
+
+  async addVictory(id: string): Promise<User> {
+    const updateUser = await prisma.user.update({
+      where: { id },
+      data: { victorys: { increment: 1 } },
+    });
+
+    return updateUser;
+  }
+
+  async removeVictory(id: string): Promise<User> {
+    const updateUser = await prisma.user.update({
+      where: { id },
+      data: { victorys: { decrement: 1 } },
+    });
+
+    return updateUser;
+  }
 }
 
 export default UserRepositoryPrisma;

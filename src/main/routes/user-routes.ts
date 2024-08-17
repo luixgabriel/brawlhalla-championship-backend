@@ -8,4 +8,6 @@ export const UserRoutes = (router: Router): void => {
   const prefix = "/users";
   router.post(prefix + "/", adaptRoute(userController, "createUser"));
   router.get(prefix + "/", adaptRoute(userController, "getUsersByVictorys"));
+  router.patch(prefix + "/add-victory/:id", adaptRoute(userController, "addVictory"));
+  router.patch(prefix + "/remove-victory/:id", adaptRoute(userController, "removeVictory"));
 };
