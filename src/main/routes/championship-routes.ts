@@ -8,7 +8,7 @@ const championshipController = new ChampionshipController(
 export const ChampionshipRoutes = (router: Router): void => {
   const prefix = "/championship";
   router.get(
-    prefix + "/",
+    prefix + "/last-champion",
     adaptRoute(championshipController, "getLastChampion")
   );
 };
