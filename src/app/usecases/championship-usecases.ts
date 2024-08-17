@@ -26,10 +26,16 @@ class ChampionshipUseCase {
     return championshipEndDate;
   }
 
+  async getCurrentChampionship() {
+    const championship =
+      await this.championshipRepository.currentChampionship();
+    return championship;
+  }
+
   startCronJob() {
     const timeZone = "America/Sao_Paulo";
 
-    cron.schedule("0 9-19 * * *", async () => {
+    cron.schedule("0 * 9-19 * *", async () => {
       const championshipEndDate = await this.getChampionshipEndDate();
       const currentDateUtc = new Date();
       const currentDate = toZonedTime(currentDateUtc, timeZone);

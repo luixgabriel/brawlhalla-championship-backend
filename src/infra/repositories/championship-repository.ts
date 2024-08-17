@@ -51,18 +51,13 @@ class ChampionShipRepositoryPrisma implements ChampionShipRepository {
     return championship.end_date;
   }
 
-  async defineChampion(id: string): Promise<Championship> {
-    const championship = await this.findChampionshipByStatus();
-    const result = await prisma.championship.update({
+  async currentChampionship(): Promise<Championship> {
+    const championship = await prisma.championship.findFirst({
       where: {
-        id: championship.id,
-      },
-      data: {
-        champion_id: id,
+        status: ChampionshipStatus.ONGOING,
       },
     });
-
-    return result as Championship;
+    return championship as Championship;
   }
 }
 

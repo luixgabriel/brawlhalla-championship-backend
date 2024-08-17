@@ -12,4 +12,8 @@ export const ChampionshipRoutes = (router: Router): void => {
     prefix + "/last-champion",
     adaptRoute(championshipController, "getLastChampion")
   );
+  router.get(
+    prefix + "/current",
+    adaptRoute(championshipController, "getCurrentChampionship")
+  );
 };

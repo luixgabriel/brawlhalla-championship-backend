@@ -11,4 +11,12 @@ export class ChampionshipController {
       body: user,
     };
   }
+
+  async getCurrentChampionship(httpRequest: HttpRequest){
+    const championship = await this.championshipUseCase.getCurrentChampionship();
+    return {
+      status: 200,
+      body: championship,
+    };
+  }
 }
