@@ -21,15 +21,19 @@ model User {
 }
 
 model Championship {
-  id          String   @id @default(uuid())
-  name        String
-  avatar_url  String
-  victorys    Int
-  pix_key     String   @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  champion    User?    @relation(fields: [champion_id], references: [id])
-  champion_id String? // Tornando o campo opcional
+  id          String             @id @default(uuid())
+  end_date    DateTime
+  status      ChampionshipStatus @default(ONGOING)
+  created_at  DateTime           @default(now())
+  updated_at  DateTime           @updatedAt
+  champion    User?              @relation(fields: [champion_id], references: [id])
+  champion_id String?
 
   @@map("championship")
+}
+
+enum ChampionshipStatus {
+  ONGOING
+  COMPLETED
+  POSTPONED
 }
