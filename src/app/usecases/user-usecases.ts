@@ -1,9 +1,10 @@
-import { UserRepository } from "data/repositories/user-repository";
-import { CreateUserDto } from "domain/dtos/create-user.dto";
+import { User } from "../../domain/entities/user";
+import UserRepository from "../repositories/user-repository";
+
 
 class UserUseCase {
   constructor(private userRepository: UserRepository) {}
-  async createUser(data: CreateUserDto) {
+  async createUser(data: User) {
     const user = await this.userRepository.createUser(data);
     return user;
   }
