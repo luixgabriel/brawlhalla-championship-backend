@@ -11,12 +11,13 @@
   },
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "test": "jest",
     "build": "tsc"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",
+    "brawhalla-championship": "file:",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

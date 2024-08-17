@@ -255,6 +255,19 @@ braces@~3.0.2:
   dependencies:
     fill-range "^7.1.1"
 
+"brawhalla-championship@file:":
+  version "1.0.0"
+  resolved "file:"
+  dependencies:
+    "@prisma/client" "^5.18.0"
+    brawhalla-championship "file:"
+    cors "^2.8.5"
+    dotenv "^16.4.5"
+    express "^4.19.2"
+    nodemon "^3.1.4"
+    prisma "^5.18.0"
+    ts-node "^10.9.2"
+
 bytes@3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz"
@@ -467,6 +480,11 @@ fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz"
   integrity sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==
+
+fsevents@~2.3.2:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 function-bind@^1.1.2:
   version "1.1.2"
