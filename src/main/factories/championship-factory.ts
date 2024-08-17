@@ -1,9 +1,14 @@
 import ChampionshipUseCase from "../../app/usecases/championship-usecases";
 import ChampionShipRepositoryPrisma from "../../infra/repositories/championship-repository";
+import UserRepositoryPrisma from "../../infra/repositories/user-repository";
 
 export const makeChampionshipUseCase = () => {
   const championshipRepository = new ChampionShipRepositoryPrisma();
-  const championshipUseCase = new ChampionshipUseCase(championshipRepository);
+  const usersRepository = new UserRepositoryPrisma();
+  const championshipUseCase = new ChampionshipUseCase(
+    championshipRepository,
+    usersRepository
+  );
 
   championshipUseCase.startCronJob();
 

@@ -19,7 +19,7 @@ class ChampionShipRepositoryPrisma implements ChampionShipRepository {
     return result as Championship;
   }
 
-  async finishChampionship(): Promise<Championship> {
+  async finishChampionship(champion_id: string): Promise<Championship> {
     const championship = await this.findChampionshipByStatus();
     const result = await prisma.championship.update({
       where: {
@@ -28,6 +28,7 @@ class ChampionShipRepositoryPrisma implements ChampionShipRepository {
       },
       data: {
         status: ChampionshipStatus.COMPLETED,
+        champion_id,
       },
     });
 

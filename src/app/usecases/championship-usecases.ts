@@ -2,9 +2,13 @@ import { isAfter, isBefore, isSameDay } from "date-fns";
 import ChampionShipRepository from "../../infra/repositories/championship-repository";
 import { toZonedTime, format } from "date-fns-tz";
 import cron from "node-cron";
+import UserRepository from "../repositories/user-repository";
 
 class ChampionshipUseCase {
-  constructor(private championshipRepository: ChampionShipRepository) {}
+  constructor(
+    private championshipRepository: ChampionShipRepository,
+    private usersRepository: UserRepository
+  ) {}
 
   async getLastChampion() {
     const user = await this.championshipRepository.lastChampion();
@@ -12,7 +16,8 @@ class ChampionshipUseCase {
   }
 
   async finishChampion() {
-    await this.championshipRepository.finishChampionship();
+    const user = await this.usersRepository.userWithMostVictory();
+    await this.championshipRepository.finishChampionship(user?.id as string);
   }
 
   async getChampionshipEndDate() {
@@ -24,7 +29,7 @@ class ChampionshipUseCase {
   startCronJob() {
     const timeZone = "America/Sao_Paulo";
 
-    cron.schedule("*/10 * * * * *", async () => {
+    cron.schedule("0 9-19 * * *", async () => {
       const championshipEndDate = await this.getChampionshipEndDate();
       const currentDateUtc = new Date();
       const currentDate = toZonedTime(currentDateUtc, timeZone);

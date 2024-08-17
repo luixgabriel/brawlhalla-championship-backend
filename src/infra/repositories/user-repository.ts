@@ -48,7 +48,7 @@ class UserRepositoryPrisma implements UserRepository {
   async userWithMostVictory(): Promise<User | null> {
     const user = await prisma.user.findFirst({
       orderBy: {
-        victorys: 'desc',
+        victorys: "desc",
       },
     });
 
