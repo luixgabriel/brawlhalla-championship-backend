@@ -5,6 +5,7 @@ import { makeChampionshipUseCase } from "../factories/championship-factory";
 const championshipController = new ChampionshipController(
   makeChampionshipUseCase()
 );
+
 export const ChampionshipRoutes = (router: Router): void => {
   const prefix = "/championship";
   router.get(
