@@ -35,7 +35,7 @@ class ChampionshipUseCase {
   startCronJob() {
     const timeZone = "America/Sao_Paulo";
 
-    cron.schedule("0 * 9-19 * *", async () => {
+    cron.schedule("* * * * *", async () => {
       const championshipEndDate = await this.getChampionshipEndDate();
       const currentDateUtc = new Date();
       const currentDate = toZonedTime(currentDateUtc, timeZone);
@@ -43,19 +43,12 @@ class ChampionshipUseCase {
       targetTime.setHours(14, 0, 0, 0);
 
       console.log(
-        `Current Date and Time (BRT): ${format(
-          currentDate,
-          "yyyy-MM-dd HH:mm:ssXXX",
-          { timeZone }
-        )}`
+        `CRON CHAMADO: ${format(currentDate, "yyyy-MM-dd HH:mm:ssXXX", {
+          timeZone,
+        })}`
       );
 
-      if (
-        isSameDay(currentDate, championshipEndDate) &&
-        isAfter(currentDate, targetTime) &&
-        isBefore(currentDate, new Date(targetTime.getTime() + 60000))
-      ) {
-        // Verifica se está dentro do intervalo de um minuto
+      if (isSameDay(currentDate, championshipEndDate)) {
         await this.finishChampion();
         console.log("Campeonato concluído.");
       } else {
