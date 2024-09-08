@@ -1,4 +1,4 @@
-import { isAfter, isBefore, isSameDay } from "date-fns";
+import { addBusinessDays, isAfter, isBefore, isSameDay } from "date-fns";
 import ChampionShipRepository from "../../infra/repositories/championship-repository";
 import { toZonedTime, format } from "date-fns-tz";
 import cron from "node-cron";
@@ -9,6 +9,13 @@ class ChampionshipUseCase {
     private championshipRepository: ChampionShipRepository,
     private usersRepository: UserRepository
   ) {}
+
+  async createChampionship() {
+    const currentDate = new Date();
+
+    const futureDate = addBusinessDays(currentDate, 15);
+    await this.championshipRepository.createChampionship(futureDate);
+  }
 
   async getLastChampion() {
     const user = await this.championshipRepository.lastChampion();
@@ -50,6 +57,8 @@ class ChampionshipUseCase {
 
       if (isSameDay(currentDate, championshipEndDate)) {
         await this.finishChampion();
+        await this.usersRepository.removeAllVictories();
+        await this.createChampionship();
         console.log("Campeonato concluído.");
       } else {
         console.log("Ainda não é o fim do campeonato ou não é a hora correta.");

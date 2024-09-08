@@ -4,6 +4,15 @@ import prisma from "../../infra/prisma/prisma-client";
 import ChampionShipRepository from "../../app/repositories/championship-repository";
 
 class ChampionShipRepositoryPrisma implements ChampionShipRepository {
+  async createChampionship(end_date: Date): Promise<Championship> {
+    const result = await prisma.championship.create({
+      data: {
+        end_date,
+      },
+    });
+    return result as Championship;
+  }
+
   async lastChampion(): Promise<Championship> {
     const result = await prisma.championship.findFirst({
       where: {

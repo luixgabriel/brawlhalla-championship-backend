@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { User } from "../../domain/entities/user";
 
 abstract class UserRepository {
@@ -7,6 +8,7 @@ abstract class UserRepository {
   abstract addVictory(id: string): Promise<User>;
   abstract removeVictory(id: string): Promise<User>;
   abstract userWithMostVictory(): Promise<User | null>;
+  abstract removeAllVictories(): Promise<Prisma.BatchPayload>;
 }
 
 export default UserRepository;

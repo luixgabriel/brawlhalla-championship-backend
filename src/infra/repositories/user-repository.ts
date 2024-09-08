@@ -1,6 +1,7 @@
 import prisma from "../prisma/prisma-client";
 import { User } from "../../domain/entities/user";
 import UserRepository from "../../app/repositories/user-repository";
+import { Prisma } from "@prisma/client";
 
 class UserRepositoryPrisma implements UserRepository {
   async createUser(user: User): Promise<User> {
@@ -43,6 +44,14 @@ class UserRepositoryPrisma implements UserRepository {
     });
 
     return updateUser;
+  }
+
+  async removeAllVictories(): Promise<Prisma.BatchPayload> {
+    const updateUsers = await prisma.user.updateMany({
+      data: { victorys: 0 },
+    });
+
+    return updateUsers;
   }
 
   async userWithMostVictory(): Promise<User | null> {

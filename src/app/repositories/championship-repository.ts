@@ -6,6 +6,7 @@ abstract class ChampionShipRepository {
   abstract findChampionshipByStatus(): Promise<Championship>;
   abstract getChampionshipEndDate(): Promise<Date>;
   abstract currentChampionship(): Promise<Championship>;
+  abstract createChampionship(end_date: Date): Promise<Championship>;
 }
 
 export default ChampionShipRepository;
