@@ -31,5 +31,5 @@ jobs:
             npm install
             npx prisma migrate deploy
             npx prisma generate
-            pm2 restart all
+            npm run start
           EOF
