@@ -27,7 +27,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
             # Definir o diretório do repositório
-            REPO_DIR="/home/ec2-user/seu-repositorio"
+            REPO_DIR="/home/ec2-user/brawlback"
 
             # Clonar o repositório se não estiver presente
             if [ ! -d "$REPO_DIR" ]; then
