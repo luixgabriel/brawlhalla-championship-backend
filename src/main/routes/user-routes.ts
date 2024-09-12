@@ -10,7 +10,7 @@ export const UserRoutes = (router: Router): void => {
   router.get(prefix + "/", adaptRoute(userController, "getUsersByVictorys"));
   router.get(prefix + "/test", (req, res: Response) => {
     res.json({
-      goat: "luix",
+      goat: "luix gabriel",
     });
   });
   router.patch(
