@@ -6,5 +6,5 @@ const httpServer = new ExpressAdapter();
 const PORT = 3000;
 
 httpServer.listen(PORT, () =>
-  console.log(`Server running at port ${PORT}`)
+  console.log(`Servidor rodando na porta ${PORT}!`)
 );
