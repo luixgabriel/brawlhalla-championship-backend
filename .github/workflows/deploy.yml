@@ -26,10 +26,31 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
-            cd /home/ec2-user
+            # Definir o diretório do repositório
+            REPO_DIR="/home/ec2-user/seu-repositorio"
+
+            # Clonar o repositório se não estiver presente
+            if [ ! -d "$REPO_DIR" ]; then
+              git clone https://github.com/luixgabriel/brawlhalla-championship-backend.git "$REPO_DIR"
+            fi
+
+            # Navegar para o diretório do projeto
+            cd "$REPO_DIR"
+
+            # Atualizar o repositório
             git pull origin master
+
+            # Instalar dependências
             npm install
+
+            # Executar migrações do Prisma e gerar o cliente Prisma
             npx prisma migrate deploy
             npx prisma generate
-            pm2 restart all
+            npm run build
+
+            # Reiniciar o PM2 (certifique-se de que seu aplicativo está configurado no PM2)
+            pm2 restart server || pm2 start npm --name "server" -- run start
+
+            # Opcional: salvar a configuração do PM2 para reinicializações
+            pm2 save
           EOF
