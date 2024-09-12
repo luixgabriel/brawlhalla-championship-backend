@@ -48,8 +48,12 @@ jobs:
             npx prisma generate
             npm run build
 
-            # Reiniciar o PM2 (certifique-se de que seu aplicativo está configurado no PM2)
-            pm2 restart server || pm2 start npm --name "server" -- run start
+            # Iniciar o processo com PM2, se não estiver em execução
+            if pm2 list | grep -q "server"; then
+              pm2 restart server
+            else
+              pm2 start dist/server.js --name "server"
+            fi
 
             # Opcional: salvar a configuração do PM2 para reinicializações
             pm2 save
