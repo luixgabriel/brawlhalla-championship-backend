@@ -8,11 +8,6 @@ export const UserRoutes = (router: Router): void => {
   const prefix = "/users";
   router.post(prefix + "/", adaptRoute(userController, "createUser"));
   router.get(prefix + "/", adaptRoute(userController, "getUsersByVictorys"));
-  router.get(prefix + "/test", (req, res: Response) => {
-    res.json({
-      goat: "luix gabriel",
-    });
-  });
   router.patch(
     prefix + "/add-victory/:id",
     adaptRoute(userController, "addVictory")
